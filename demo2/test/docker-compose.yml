@@ -9,7 +9,7 @@ services:
     environment:
       - POSTGRES_PASSWORD=wiredtest
     networks:
-      - wb-net
+      - ps-330-wb-net
 
   products-api-test:
     image: psdockerrun/products-api
@@ -18,7 +18,7 @@ services:
     volumes:
       - ./config/products-api:/app/config
     networks:
-      - wb-net
+      - ps-330-wb-net
     depends_on:
       - products-db-test
 
@@ -29,7 +29,7 @@ services:
     environment:
       - POSTGRES_CONNECTION_STRING=host=products-db-test port=5432 user=postgres password=wiredtest dbname=postgres sslmode=disable
     networks:
-      - wb-net
+      - ps-330-wb-net
     depends_on:
       - products-db-test
   
@@ -43,10 +43,10 @@ services:
       - ./config/web/config:/app/config
       - ./config/web/secrets:/app/secrets
     networks:
-      - wb-net
+      - ps-330-wb-net
     depends_on:
       - products-api-test
       - stock-api-test
 
 networks:
-  wb-net:
+  ps-330-wb-net:

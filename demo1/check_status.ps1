@@ -3,9 +3,9 @@ $ErrorActionPreference = "stop"
 
 
 # $action = 1 # delete container
-# $action = 2 # start container
+# $action = 2 # start container (Fix: products-api and products-db exit on initial startup)
 
-$action = 0
+$action = 1
 
 
 $filter = 'psdockerrun'

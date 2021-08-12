@@ -9,7 +9,7 @@ services:
     restart: always
     mem_limit: 500M
     networks:
-      - wb-net
+      - ps-330-wb-net
 
   products-api-test:
     image: psdockerrun/products-api
@@ -20,7 +20,7 @@ services:
     restart: always
     mem_limit: 500M
     networks:
-      - wb-net
+      - ps-330-wb-net
     depends_on:
       - products-db-test
 
@@ -34,7 +34,7 @@ services:
     mem_limit: 125M
     scale: 3
     networks:
-      - wb-net
+      - ps-330-wb-net
     depends_on:
       - products-db-test
   
@@ -50,10 +50,10 @@ services:
     restart: always
     mem_limit: 250M
     networks:
-      - wb-net
+      - ps-330-wb-net
     depends_on:
       - products-api-test
       - stock-api-test
 
 networks:
-  wb-net:
+  ps-330-wb-net:
