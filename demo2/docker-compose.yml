@@ -1,10 +1,11 @@
-# 08/11/2021 01:35 pm - SSN - Copied code. Have to restart products-api and products-db.  Use check_status.ps1.
 
+# 08/15/2021 05:04 am - SSN 
+# Replaced psdockerrun/products-db with samniyazi/ps-330-products-db-test-20210815
 
 services:
 
   products-db:
-    image: psdockerrun/products-db
+    image: samniyazi/ps-330-products-db-test-20210815
     ports:
       - "5432:5432"
     environment:
@@ -16,6 +17,8 @@ services:
     image: psdockerrun/products-api
     ports:
       - "8081:80"
+
+
     networks:
       - ps-330-wb-net
     depends_on:
@@ -25,6 +28,8 @@ services:
     image: psdockerrun/stock-api
     ports:
       - "8082:8080"
+
+      
     networks:
       - ps-330-wb-net
     depends_on:
@@ -40,5 +45,5 @@ services:
       - products-api      
       - stock-api
 
-  networks:
+networks:
   ps-330-wb-net:

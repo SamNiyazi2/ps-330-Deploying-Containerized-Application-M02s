@@ -12,12 +12,12 @@ docker ps -a -f network=ps-330-wired-brain -q | % { docker rm $_ -f }
 # psdockerrun/products-db
 # Relace with postgres
 # Using /demo/db/dockerfile
-# docker build -t ps-330-products-db-test-20210815 .
+# docker build -t samniyazi/ps-330-products-db-test-20210815 .
 
 docker run -d --network ps-330-wired-brain `
     --name products-db `
     -e POSTGRES_PASSWORD=wired `
-    ps-330-products-db-test-20210815
+    samniyazi/ps-330-products-db-test-20210815
 
 # products API:
 docker run -d --network ps-330-wired-brain `

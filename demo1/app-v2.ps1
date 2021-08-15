@@ -14,7 +14,7 @@ docker ps -a -f network=ps-330-wired-brain -q | % { docker rm $_ -f }
 docker run -d --network ps-330-wired-brain `
     --name products-db-test `
     -e POSTGRES_PASSWORD=wiredtest `
-    ps-330-products-db-test-20210815
+    samniyazi/ps-330-products-db-test-20210815
 
 # products API:
 docker run -d --network ps-330-wired-brain `

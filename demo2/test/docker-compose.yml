@@ -1,9 +1,14 @@
+
+
+# 08/15/2021 05:48 am - SSN 
+# Replaced psdockerrun/products-db with samniyazi/ps-330-products-db-test-20210815
+
 version: '3.7'
 
 services:
 
   products-db-test:
-    image: psdockerrun/products-db
+    image: samniyazi/ps-330-products-db-test-20210815
     ports:
       - "5433:5432"
     environment:
