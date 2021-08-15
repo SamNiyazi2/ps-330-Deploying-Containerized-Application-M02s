@@ -1,9 +1,13 @@
 
 $ErrorActionPreference = "stop"
 
+$lf = "`r`n" 
+$lf * 10
+$d = Get-Date
+write-host $d
 
 # $action = 1 # delete container
-# $action = 2 # start container
+# $action = 2 # start container (Fix: products-api and products-db exit on initial startup)
 
 $action = 0
 
@@ -41,3 +45,10 @@ docker ps -a | % {
     }
 
 }
+
+
+$lf * 2
+
+write-host "Done" -ForegroundColor Green
+
+$lf * 2

@@ -1,20 +1,26 @@
+
+# 08/15/2021 05:04 am - SSN 
+# Replaced psdockerrun/products-db with samniyazi/ps-330-products-db-test-20210815
+
 services:
 
   products-db:
-    image: psdockerrun/products-db
+    image: samniyazi/ps-330-products-db-test-20210815
     ports:
       - "5432:5432"
     environment:
       - POSTGRES_PASSWORD=wired
     networks:
-      - wb-net
+      - ps-330-wb-net
 
   products-api:
     image: psdockerrun/products-api
     ports:
       - "8081:80"
+
+
     networks:
-      - wb-net
+      - ps-330-wb-net
     depends_on:
       - products-db
 
@@ -22,8 +28,10 @@ services:
     image: psdockerrun/stock-api
     ports:
       - "8082:8080"
+
+      
     networks:
-      - wb-net
+      - ps-330-wb-net
     depends_on:
       - products-db
   
@@ -32,10 +40,10 @@ services:
     ports:
       - "8080:80"
     networks:
-      - wb-net
+      - ps-330-wb-net
     depends_on:
       - products-api      
       - stock-api
 
 networks:
-  wb-net:
+  ps-330-wb-net:

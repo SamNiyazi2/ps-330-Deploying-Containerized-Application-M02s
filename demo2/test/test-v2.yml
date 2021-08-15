@@ -1,58 +1,61 @@
-services:
+# 08/15/2021 06:09 am - SSN 
+# Replaced psdockerrun/products-db with samniyazi/ps-330-products-db-test-20210815
 
-  products-db-test:
-    image: psdockerrun/products-db
-    ports:
-      - "5433:5432"
-    environment:
-      - POSTGRES_PASSWORD=wiredtest
-    restart: always
-    mem_limit: 500M
-    networks:
-      - wb-net
+  services:
 
-  products-api-test:
-    image: psdockerrun/products-api
-    ports:
-      - "8011:80"
-    volumes:
-      - ./config/products-api:/app/config
-    restart: always
-    mem_limit: 500M
-    networks:
-      - wb-net
-    depends_on:
-      - products-db-test
+    products-db-test:
+      image: samniyazi/ps-330-products-db-test-20210815
+      ports:
+        - "5433:5432"
+      environment:
+        - POSTGRES_PASSWORD=wiredtest
+      restart: always
+      mem_limit: 500M
+      networks:
+        - ps-330-wb-net
 
-  stock-api-test:
-    image: psdockerrun/stock-api
-    ports:
-      - "8012:8080"
-    environment:
-      - POSTGRES_CONNECTION_STRING=host=products-db-test port=5432 user=postgres password=wiredtest dbname=postgres sslmode=disable
-    restart: always
-    mem_limit: 125M
-    networks:
-      - wb-net
-    depends_on:
-      - products-db-test
-  
-  web-test:
-    image: psdockerrun/web
-    ports:
-      - "8010:80"
-    environment:
-      - Environment=TEST-2
-    volumes:
-      - ./config/web/config:/app/config
-      - ./config/web/secrets:/app/secrets
-    restart: always
-    mem_limit: 250M
-    networks:
-      - wb-net
-    depends_on:
-      - products-api-test
-      - stock-api-test
+    products-api-test:
+      image: psdockerrun/products-api
+      ports:
+        - "8011:80"
+      volumes:
+        - ./config/products-api:/app/config
+      restart: always
+      mem_limit: 500M
+      networks:
+        - ps-330-wb-net
+      depends_on:
+        - products-db-test
 
-networks:
-  wb-net:
+    stock-api-test:
+      image: psdockerrun/stock-api
+      ports:
+        - "8012:8080"
+      environment:
+        - POSTGRES_CONNECTION_STRING=host=products-db-test port=5432 user=postgres password=wiredtest dbname=postgres sslmode=disable
+      restart: always
+      mem_limit: 125M
+      networks:
+        - ps-330-wb-net
+      depends_on:
+        - products-db-test
+    
+    web-test:
+      image: psdockerrun/web
+      ports:
+        - "8010:80"
+      environment:
+        - Environment=TEST-2
+      volumes:
+        - ./config/web/config:/app/config
+        - ./config/web/secrets:/app/secrets
+      restart: always
+      mem_limit: 250M
+      networks:
+        - ps-330-wb-net
+      depends_on:
+        - products-api-test
+        - stock-api-test
+
+  networks:
+    ps-330-wb-net:

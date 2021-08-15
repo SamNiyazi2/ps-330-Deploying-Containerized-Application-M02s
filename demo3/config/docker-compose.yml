@@ -9,14 +9,14 @@ services:
     environment:
       - POSTGRES_PASSWORD=wired
     networks:
-      - wb-net
+      - ps-330-wb-net
 
   products-api:
     image: psdockerrun/products-api
     ports:
       - "8081:80"
     networks:
-      - wb-net
+      - ps-330-wb-net
     depends_on:
       - products-db
 
@@ -25,7 +25,7 @@ services:
     ports:
       - "8082:8080"
     networks:
-      - wb-net
+      - ps-330-wb-net
     depends_on:
       - products-db
   
@@ -34,10 +34,10 @@ services:
     ports:
       - "8080:80"
     networks:
-      - wb-net
+      - ps-330-wb-net
     depends_on:
       - products-api      
       - stock-api
 
 networks:
-  wb-net:
+  ps-330-wb-net:

@@ -1,7 +1,10 @@
+# 08/15/2021 07:48 am - SSN 
+# Replaced psdockerrun/products-db with samniyazi/ps-330-products-db-test-20210815
+
 services:
 
   products-db-test:
-    image: psdockerrun/products-db
+    image: samniyazi/ps-330-products-db-test-20210815
     ports:
       - "5433:5432"
     environment:
@@ -9,7 +12,7 @@ services:
     restart: always
     mem_limit: 500M
     networks:
-      - wb-net
+      - ps-330-wb-net
 
   products-api-test:
     image: psdockerrun/products-api
@@ -20,7 +23,7 @@ services:
     restart: always
     mem_limit: 500M
     networks:
-      - wb-net
+      - ps-330-wb-net
     depends_on:
       - products-db-test
 
@@ -34,7 +37,7 @@ services:
     mem_limit: 125M
     scale: 3
     networks:
-      - wb-net
+      - ps-330-wb-net
     depends_on:
       - products-db-test
   
@@ -43,17 +46,17 @@ services:
     ports:
       - "8010:80"
     environment:
-      - Environment=TEST-2
+      - Environment=Demo3-TEST-2
     volumes:
       - ./config/web/config:/app/config
       - ./config/web/secrets:/app/secrets
     restart: always
     mem_limit: 250M
     networks:
-      - wb-net
+      - ps-330-wb-net
     depends_on:
       - products-api-test
       - stock-api-test
 
 networks:
-  wb-net:
+  ps-330-wb-net:
