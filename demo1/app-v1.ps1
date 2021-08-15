@@ -2,11 +2,22 @@
 # create app network:
 docker network create ps-330-wired-brain
 
+
+# 08/15/2021 02:40 am - SSN - Remove existing containers
+docker ps -a -f network=ps-330-wired-brain -q | % { docker rm $_ -f }
+
 # database:
+
+# 08/15/2021 02:34 am - SSN - Temp fix
+# psdockerrun/products-db
+# Relace with postgres
+# Using /demo/db/dockerfile
+# docker build -t ps-330-products-db-test-20210815 .
+
 docker run -d --network ps-330-wired-brain `
     --name products-db `
     -e POSTGRES_PASSWORD=wired `
-    psdockerrun/products-db
+    ps-330-products-db-test-20210815
 
 # products API:
 docker run -d --network ps-330-wired-brain `

@@ -2,13 +2,22 @@
 # create app network:
 docker network create ps-330-wired-brain
 
+
+# 08/15/2021 04:14 am - SSN - Added
+docker ps -a -f network=ps-330-wired-brain -q | % { docker rm $_ -f }
+# Replcaed
+# psdockerrun/products-db
+
+
 # database:
+
 docker run -d --network ps-330-wired-brain `
  --name products-db-test `
  -e POSTGRES_PASSWORD=wiredtest `
  --restart=always `
  --memory=500M `
- psdockerrun/products-db
+ ps-330-products-db-test-20210815
+
 
 # products API:
 docker run -d --network ps-330-wired-brain `
